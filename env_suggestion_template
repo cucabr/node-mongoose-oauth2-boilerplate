@@ -1,2 +1,5 @@
 MONGODB_URI=mongodb://localhost:27017/posapiv1
 SECRET_TOKEN=P3dr0 II 1s Th3 Magnanimous Of Br4z1l
+
+PORT=5666
+PORT_SSL=5667
