@@ -8,19 +8,23 @@ const express = require('express');
 const { errorHandler } = require('../middleware')
 
 //Models
-const { PosUsers } = require('../models/PosUsers')
+const v1 = require('./v1')
+const oauth2 = require('./oauth2')
 
 //Controllers
-const posUsersController = require('../controllers/PosUsers')
-
-const models = { PosUsers }
-const routersInit = (config) => {
+const routersInit = (config, app) => {
   var router = express();
 
-  router.use("/posusers", posUsersController(models, { config }))
+  router.use("/oauth2", oauth2(config, app))
+  router.use("/v1", v1(config, app))
+
+  router.get("/callback", (req, res, next) => {
+    console.log('aqui callback get',req)
+    res.status(200).json({ success: true })
+  })
 
   router.use(errorHandler)
-  
+
   return router
 }
 

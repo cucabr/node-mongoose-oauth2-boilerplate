@@ -1,0 +1,25 @@
+html
+  head
+  body
+    .row 
+      .col-md-12 
+        h5 API
+    .row
+      .col-md-6.offset-md-3
+        form(method='POST')
+          .form-group
+            label(for='username')
+              | Usuário
+              span.text-danger *
+            |                 
+            input#username.form-control(name='username', type='text', value='test')
+          |             
+          .form-group
+            label(for='password')
+              | Senha
+              span.text-danger *
+            |                 
+            input#password.form-control(name='password', type='text', value='test')
+          |             
+          button.btn.btn-primary
+            | Login

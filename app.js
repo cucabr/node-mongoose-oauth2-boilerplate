@@ -9,6 +9,8 @@ var express = require('express');
 var cors = require('cors')
 var path = require('path');
 var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var OAuthServer = require('express-oauth-server');
 
 var { config } = require('./src/config')
 
@@ -22,6 +24,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 app.use(cors())
+app.use(logger('dev'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -30,7 +33,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 mongoManager.connect();
 
-app.use('/api/v1', api( config ))
+app.oauth = new OAuthServer({
+  debug: true,
+  model: require('./src/models/OAuth2')
+});
+
+app.use('/api', api( config, app ))
 app.use('/doc',express.static('doc'))
 
 // error handler

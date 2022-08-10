@@ -1,6 +1,9 @@
 # Env
 .env
 
+# PEM
+.pem 
+
 # Logs
 logs
 *.log

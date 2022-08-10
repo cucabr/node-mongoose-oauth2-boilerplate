@@ -6,14 +6,14 @@ const errorHandler = (err, req, res, next) => {
     err instanceof APIError) ? err : new InternalServerError();
 
   if (process.env.NODE_ENV !== 'production') { 
-    // do something here
+    console.error(err)
   } 
   if (['ValidationError', 'UserExistsError'].includes(err.name)) {
     // if it special error
     return res.status(405).json(err);
   }
   // log error if needed 
-  // logger.info('API error', { error: err });
+  //logger.info('API error', { error: err });
 
   return res // return 500 for user
     .status(error.status || 500)

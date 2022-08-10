@@ -4,11 +4,11 @@
  * Copyright (c) 2022 André Augusto - AETEC Tecnologia Ltda.
  */
 
-const get = ({ PosUsers }, { config }) => async (req, res, next) => {
+const get = ({ Users }, { config }) => async (req, res, next) => {
     const { _id } = req.params;
     try {
-        const posUsers = await PosUsers.find({ _id })
-        res.status(200).send({ posUsers })
+        const users = await Users.find({ _id })
+        res.status(200).send({ users })
     } catch (error) {
         next(error);
     }
